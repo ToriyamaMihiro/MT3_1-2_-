@@ -50,6 +50,40 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		Matrix4x4 worldViewProjectionMatrix = Multiply(worldMatrix, Multiply(viewMatrix, projectionMatrix));
 		Matrix4x4 viewportMatrix = MakeViewportMatrix(0, 0, float(kWindowWidth), float(kWindowHeight), 0.0f, 1.0f);
 
+		//球体の移動
+		if (keys[DIK_W]) {
+			sphere.center.y += 0.1f;
+		}
+		if (keys[DIK_A]) {
+			sphere.center.x -= 0.1f;
+		}
+		if (keys[DIK_S]) {
+			sphere.center.y -= 0.1f;
+		}
+		if (keys[DIK_D]) {
+			sphere.center.x += 0.1f;
+		}
+		//カメラの移動
+		if (keys[DIK_DOWN]) {
+			cameraPosition.y -= 0.1f;
+		}
+		if (keys[DIK_LEFT]) {
+			cameraPosition.x -= 0.1f;
+		}
+		if (keys[DIK_UP]) {
+			cameraPosition.y += 0.1f;
+		}
+		if (keys[DIK_RIGHT]) {
+			cameraPosition.x += 0.1f;
+		}
+		if (keys[DIK_Z]) {
+			cameraPosition.z += 0.1f;
+		}
+		if (keys[DIK_X]) {
+			cameraPosition.z -= 0.1f;
+		}
+
+
 		///
 		/// ↑更新処理ここまで
 		///

@@ -35,7 +35,7 @@ void DrawSphere(const Sphere& sphere, const Matrix4x4& viewProjectionMatrix, con
 
 void DrawGrid(const Matrix4x4& viewProjectionMatrix, const Matrix4x4& viewportMatrix)
 {
-	const uint32_t kSubdivision = 10;//分割数
+	const uint32_t kSubdivision = 16;//分割数
 	const float kGridHalfWidth = 2.0f;//グリッドの半分
 	const float kGridEvery = (kGridHalfWidth * 2.0f) / float(kSubdivision);//一つ分の長さ
 
@@ -59,12 +59,15 @@ void DrawGrid(const Matrix4x4& viewProjectionMatrix, const Matrix4x4& viewportMa
 		else {
 			Novice::DrawLine(int(screenVertices[0].x), int(screenVertices[0].y),
 				int(screenVertices[1].x), int(screenVertices[1].y), 0xAAAAAAFF);
+		
+			
 		}
 	}
+	
 	for (uint32_t zIndex = 0; zIndex <= kSubdivision; ++zIndex) {
 		//ワールド座標系の始点と終点を求める
-		worldVertices[0] = { zIndex * kGridEvery - kGridHalfWidth,0.0f,kGridHalfWidth };
-		worldVertices[1] = { zIndex * kGridEvery - kGridHalfWidth,0.0f, -kGridHalfWidth };
+		worldVertices[0] = { kGridHalfWidth,0.0f, zIndex * kGridEvery - kGridHalfWidth };
+		worldVertices[1] = { -kGridHalfWidth,0.0f, zIndex*kGridEvery-kGridHalfWidth };
 		//スクリーン座標系まで変換をかける
 		for (uint32_t i = 0; i < 2; ++i) {
 			ndcVertex = Transform(worldVertices[i], viewProjectionMatrix);
